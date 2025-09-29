@@ -8,7 +8,7 @@ const Navbar = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Menu className="h-[1.2rem] w-[1.2rem] transition-all data-[state=open]:bg-red-500  " />
+          <Menu className="h-[1.2rem] w-[1.2rem] transition-all " />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
