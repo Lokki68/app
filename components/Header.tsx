@@ -1,6 +1,7 @@
 import { LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import ModeToggle from "./themes/mode-toggle";
+import Navigation from "./Navigation";
 
 const Header = () => {
 
@@ -9,18 +10,20 @@ const Header = () => {
   }
 
   return (
-    <div className="flex justify-between items-center w-full ">
-      <div className="flex items-center gap-4">
-        {/* <SidebarTrigger /> */}
-        <span className="text-2xl font-semibold">EventLoop</span>
+    <header className="flex flex-col px-5 py-2 " >
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-4">
+          <span className="text-2xl font-semibold">EventLoop</span>
+        </div>
+        <div className="flex items-center gap-4">
+          <Button onClick={handleLogout}>
+            <LogOut className="lg:nine" />
+          </Button>
+          <ModeToggle />
+          <Navigation />
+        </div>
       </div>
-      <div className="flex items-center gap-4">
-        <Button onClick={handleLogout}>
-          <LogOut className="lg:nine" />
-        </Button>
-        <ModeToggle />
-      </div>
-    </div>
+    </header>
   );
 };
 

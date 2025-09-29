@@ -15,7 +15,7 @@ export default function RootLayout({
       <ThemeProvider defaultTheme="dark" storageKey='eventloop-theme'>
         <body className="flex flex-col min-h-screen">
           <Header />
-          <main>{children}</main>
+          <main className="px-5">{children}</main>
           <Footer />
         </body>
       </ThemeProvider>
