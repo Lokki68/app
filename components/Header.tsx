@@ -3,7 +3,7 @@ import ModeToggle from "./themes/mode-toggle";
 
 const Header = () => {
   return (
-    <header className="flex flex-col px-5 py-2 ">
+    <header className="flex flex-col px-5 py-2 border-b border-gray-300 dark:border-gray-700 ">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <span className="text-2xl font-semibold">EventLoop</span>
