@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <div>
+    <div className="flex justify-between items-center">
       <h1>Events Page</h1>
       <Button asChild>
         <Link href="/events/create">Add</Link>

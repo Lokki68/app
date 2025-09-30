@@ -1,11 +1,23 @@
+import EventType from "@/lib/types/event";
 import mongoose from "mongoose";
 
-const eventSchema = new mongoose.Schema(
+const eventSchema = new mongoose.Schema<EventType>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
     date: { type: Date, required: true },
-    location: { type: String, required: true },
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
     created_by: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
