@@ -1,8 +1,8 @@
 import EventType from "@/lib/types/event";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import slugify from "slugify";
 
-const eventSchema = new mongoose.Schema<EventType>(
+const eventSchema = new Schema<EventType>(
   {
     title: { type: String, required: true },
     slug: { type: String, unique: true },
@@ -22,11 +22,11 @@ const eventSchema = new mongoose.Schema<EventType>(
     },
     address: { type: String, required: true },
     active: { type: Boolean, default: true },
-    // created_by: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "User",
-    //   required: true,
-    // },
+    created_by: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
