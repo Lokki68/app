@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
 
 interface NavigationItemProps {
@@ -7,11 +7,12 @@ interface NavigationItemProps {
 }
 
 const NavigationItem = ({ href, title }: NavigationItemProps) => {
-  return (
-    <DropdownMenuItem>
-      <Link href={href}>{title}</Link>
-    </DropdownMenuItem>
-  );
+  const router = useRouter();
+
+  function handleNavigate() {
+    router.push(href);
+  }
+  return <DropdownMenuItem onClick={handleNavigate}>{title}</DropdownMenuItem>;
 };
 
 export default NavigationItem;
