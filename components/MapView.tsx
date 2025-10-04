@@ -1,6 +1,17 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+
+function ChangeView({ lat, lon }: { lat: number; lon: number }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.setView([lat, lon]);
+  }, [lat, lon, map]);
+
+  return null;
+}
 
 // Fix d’icône Leaflet (sinon bug dans Next.js)
 const icon = L.icon({
@@ -23,6 +34,7 @@ export default function MapView({ lat, lon }: { lat: number; lon: number }) {
       <Marker position={[lat, lon]} icon={icon}>
         <Popup>Lieu choisi</Popup>
       </Marker>
+      <ChangeView lat={lat} lon={lon} />
     </MapContainer>
   );
 }

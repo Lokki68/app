@@ -1,4 +1,5 @@
 import EventType from "@/lib/types/event";
+import { createModel } from "@/lib/utils/db/createModel";
 import mongoose, { Schema } from "mongoose";
 import slugify from "slugify";
 
@@ -52,4 +53,4 @@ eventSchema.pre("save", async function (next) {
   next();
 });
 
-export const Event = mongoose.model("Event", eventSchema);
+export const Event = createModel("Event", eventSchema);

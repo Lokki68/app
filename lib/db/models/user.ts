@@ -1,5 +1,6 @@
 import UserType from "@/lib/types/user";
-import mongoose, { Schema } from "mongoose";
+import { createModel } from "@/lib/utils/db/createModel";
+import { Schema } from "mongoose";
 
 const userSchema = new Schema<UserType>({
   username: { type: String, required: true, unique: true },
@@ -10,4 +11,4 @@ const userSchema = new Schema<UserType>({
   events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
 });
 
-export const User = mongoose.model("User", userSchema);
+export const User = createModel("User", userSchema);
