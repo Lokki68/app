@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { register } from "@/lib/db/serverActions/sessionAction";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import { toast } from "sonner";
@@ -35,7 +36,7 @@ const SignUp = () => {
     <main>
       <Card>
         <CardHeader>
-          <h1 className="text-center text-xl">S'enregistrer</h1>
+          <h1 className="text-center text-xl">Inscription</h1>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="grid gap-4">
@@ -61,7 +62,13 @@ const SignUp = () => {
               </div>
             </div>
 
-            <Button type="submit">S'enregistrer</Button>
+            <Button type="submit">Enregistrer</Button>
+            <p className="text-center">
+              Je ne pocède déjà un compte -{" "}
+              <Link href="/signin" className="text-blue-600 underline">
+                Connection ici
+              </Link>
+            </p>
           </form>
         </CardContent>
       </Card>
