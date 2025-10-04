@@ -22,11 +22,11 @@ const eventSchema = new Schema<EventType>(
     },
     address: { type: String, required: true },
     active: { type: Boolean, default: true },
-    created_by: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    // created_by: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );
@@ -52,5 +52,4 @@ eventSchema.pre("save", async function (next) {
   next();
 });
 
-export const Event =
-  mongoose.models?.Event || mongoose.model("Event", eventSchema);
+export const Event = mongoose.model("Event", eventSchema);

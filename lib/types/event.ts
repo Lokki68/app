@@ -1,5 +1,3 @@
-import { Schema } from "mongoose";
-
 type EventType = {
   _id?: string;
   title: string;
@@ -11,7 +9,7 @@ type EventType = {
     coordinates: [number, number]; // [longitude, latitude]
   };
   address: string;
-  created_by: Schema.Types.ObjectId; // User ID
+  // created_by: Schema.Types.ObjectId; // User ID
   active: boolean;
 };
 
