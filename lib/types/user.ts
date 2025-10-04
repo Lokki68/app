@@ -3,6 +3,7 @@ import { Schema } from "mongoose";
 type UserType = {
   _id?: string;
   username: string;
+  normalizedUsername: string;
   firstName?: string;
   lastName?: string;
   email: string;

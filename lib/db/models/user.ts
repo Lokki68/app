@@ -4,6 +4,7 @@ import { Schema } from "mongoose";
 
 const userSchema = new Schema<UserType>({
   username: { type: String, required: true, unique: true },
+  normalizedUsername: { type: String, required: true, unique: true },
   firstName: { type: String },
   lastName: { type: String },
   email: { type: String, required: true, unique: true },
