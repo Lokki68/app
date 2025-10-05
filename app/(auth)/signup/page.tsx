@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { register } from "@/lib/db/serverActions/sessionAction";
+import { register } from "@/lib/db/serverActions/sessionServerAction";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
