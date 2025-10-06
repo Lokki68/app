@@ -1,6 +1,17 @@
 import EventType from "@/lib/types/event";
 import { connectToDb } from "@/lib/utils/db/connectToDb";
-import { Event } from "../event";
+import { Schema } from "mongoose";
+import { Event } from "../models/event";
+
+export async function getEvents(userId: Schema.Types.ObjectId) {
+  const events = await Event.find().populate("created_by", userId);
+
+  if (!events) {
+    throw new Error("no events");
+  }
+
+  return { success: true, events };
+}
 
 export async function getEvent(slug: string): Promise<EventType | null> {
   await connectToDb();

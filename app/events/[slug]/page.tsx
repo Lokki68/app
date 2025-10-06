@@ -1,4 +1,4 @@
-import { getEvent } from "@/lib/db/models/serverMethods/eventServerMethods";
+import { getEvent } from "@/lib/db/serverMethods/eventServerMethods";
 
 const Event = async ({ params }) => {
   const { slug } = await params;
