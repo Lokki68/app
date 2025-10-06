@@ -11,7 +11,9 @@ export async function getEvents(userId: string) {
     throw new Error("User not found");
   }
 
-  const events = await Event.find().populate("created_by", user._id);
+  const events = await Event.find()
+    .populate("created_by", user._id)
+    .sort({ date: "asc" });
 
   if (!events) {
     throw new Error("no events");

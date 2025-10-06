@@ -10,12 +10,15 @@ import {
 import { getEvents } from "@/lib/db/serverMethods/eventServerMethods";
 import { sessionInfo } from "@/lib/db/serverMethods/sessionServerMethods";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import EventLine from "./eventLine";
 
 const Events = async () => {
-  const session = await sessionInfo();
+  const { userId } = await sessionInfo();
 
-  const { userId } = session;
+  if (!userId) {
+    redirect("/signin");
+  }
 
   const { events } = await getEvents(userId);
 
@@ -35,7 +38,10 @@ const Events = async () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Test</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Titre</TableHead>
+                  <TableHead>Description</TableHead>
+                  <TableHead>Lieu</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
