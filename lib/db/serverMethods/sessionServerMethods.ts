@@ -12,7 +12,7 @@ export async function sessionInfo() {
     return { success: false };
   }
 
-  await connectToDb;
+  await connectToDb();
 
   const session = await Session.findById(sessionId);
 

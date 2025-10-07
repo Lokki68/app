@@ -5,6 +5,8 @@ import { Event } from "../models/event";
 import { User } from "../models/user";
 
 export async function getEvents(userId: string) {
+  await connectToDb();
+
   const user: UserType | null = await User.findById(userId);
 
   if (!user) {
@@ -18,8 +20,6 @@ export async function getEvents(userId: string) {
   if (!events) {
     throw new Error("no events");
   }
-
-  console.log("events =>", events);
 
   return { success: true, events };
 }
