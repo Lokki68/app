@@ -7,8 +7,10 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { getEvent } from "@/lib/db/serverMethods/eventServerMethods";
+import { sessionInfo } from "@/lib/db/serverMethods/sessionServerMethods";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
+import DeleteEvent from "./delete/page";
 
 type EventParams = {
   params: {
@@ -20,6 +22,7 @@ const Event = async ({ params }: EventParams) => {
   const { slug } = params;
 
   const event = await getEvent(slug);
+  const { userId } = await sessionInfo();
 
   if (!event) {
     return <div>Event not found</div>;
@@ -49,10 +52,14 @@ const Event = async ({ params }: EventParams) => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end gap-4 mt-12">
-          <Button variant="secondary" asChild>
-            <Link href={`/events/${event.slug}/update`}>Modifier</Link>
-          </Button>
-          <Button variant="destructive">Supprimer</Button>
+          {userId === event.created_by.toString() && (
+            <>
+              <Button variant="secondary" asChild>
+                <Link href={`/events/${event.slug}/update`}>Modifier</Link>
+              </Button>
+              {event._id && <DeleteEvent id={event._id.toString()} />}
+            </>
+          )}
         </CardFooter>
       </Card>
     </main>

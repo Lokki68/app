@@ -31,8 +31,6 @@ const CreateEvent = () => {
 
     const data = await res.json();
 
-    console.log(data[0]);
-
     if (data.length > 0) {
       const { lat, lon } = data[0];
       setCoords({ lat, lon });

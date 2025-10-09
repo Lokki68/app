@@ -1,7 +1,6 @@
 "use server";
 
 import { connectToDb } from "@/lib/utils/db/connectToDb";
-import slugify from "slugify";
 import AppError from "../errorHandling/customError";
 import { Event } from "../models/event";
 import { sessionInfo } from "../serverMethods/sessionServerMethods";
@@ -61,7 +60,6 @@ export async function updateEvent(id: string, formData: FormData) {
   const { title, date, description, address, lat, lon } =
     Object.fromEntries(formData);
 
-  const slug = slugify(title as string);
   const { userId } = await sessionInfo();
 
   try {
@@ -77,7 +75,6 @@ export async function updateEvent(id: string, formData: FormData) {
 
     const updatedEvent = await Event.findByIdAndUpdate(id, {
       title,
-      slug,
       description,
       date,
       address,
@@ -94,5 +91,19 @@ export async function updateEvent(id: string, formData: FormData) {
     return { success: true, slug: updatedEvent.slug };
   } catch (error) {
     return { success: false, error: (error as Error).message };
+  }
+}
+
+export async function deleteEvent(id: string) {
+  try {
+    await connectToDb();
+
+    await Event.findByIdAndDelete(id);
+
+    return { success: true };
+  } catch (error) {
+    console.error("Une errer est survenue : ", error);
+
+    return { success: false };
   }
 }

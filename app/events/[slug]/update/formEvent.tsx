@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { updateEvent } from "@/lib/db/serverActions/eventServerActions";
 import EventType from "@/lib/types/event";
-import { FormEvent, useState } from "react";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 
 type FormEventParams = {
@@ -23,7 +24,7 @@ const FormEvent = ({ event }: FormEventParams) => {
 
   const defaultDate = new Date(event.date).toISOString().split("T")[0];
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
@@ -42,12 +43,31 @@ const FormEvent = ({ event }: FormEventParams) => {
 
     if (result.success) {
       toast.success("Evenement mis à jour avec succès !");
+      redirect(`/events/${result.slug}`);
     } else {
       toast.error("Une erreur est survenue!");
     }
   };
 
-  function handleSearch() {}
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!address) return;
+
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+        address
+      )}`
+    );
+
+    const data = await res.json();
+
+    if (data.length > 0) {
+      const { lat, lon } = data[0];
+      setCoords({ lat, lon });
+    } else {
+      toast.error("Adresse non trouvée");
+    }
+  };
 
   return (
     <form className="grid gap-4" onSubmit={handleSubmit}>

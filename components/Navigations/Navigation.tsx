@@ -18,8 +18,8 @@ const Navbar = ({ isConnected }: { isConnected: boolean }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <NavigationItem href="/" title="Home" />
-        <NavigationItem href="/events" title="Event" />
+        <NavigationItem href="/" title="Accueil" />
+        <NavigationItem href="/events" title="Evènements" />
         {!isConnected && (
           <>
             <DropdownMenuSeparator />

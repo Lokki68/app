@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { getEvents } from "@/lib/db/serverMethods/eventServerMethods";
 import { sessionInfo } from "@/lib/db/serverMethods/sessionServerMethods";
+import { CirclePlus } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import EventLine from "./eventLine";
@@ -28,7 +29,9 @@ const Events = async () => {
       <div className="flex justify-between items-center mb-7">
         <h1>Events Page</h1>
         <Button asChild>
-          <Link href="/events/create">Add</Link>
+          <Link href="/events/create">
+            <CirclePlus />
+          </Link>
         </Button>
       </div>
       <Card>
