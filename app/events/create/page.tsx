@@ -13,7 +13,7 @@ import { toast } from "sonner";
 
 const CreateEvent = () => {
   const router = useRouter();
-  const [coords, setCoords] = useState<{ lat: number; long: number } | null>(
+  const [coords, setCoords] = useState<{ lat: string; lon: string } | null>(
     null
   );
 
@@ -31,11 +31,13 @@ const CreateEvent = () => {
 
     const data = await res.json();
 
+    console.log(data[0]);
+
     if (data.length > 0) {
       const { lat, lon } = data[0];
-      setCoords({ lat: parseFloat(lat), long: parseFloat(lon) });
+      setCoords({ lat, lon });
     } else {
-      alert("Adresse non trouvée");
+      toast.error("Adresse non trouvée");
     }
   };
 
@@ -45,8 +47,8 @@ const CreateEvent = () => {
     const formData = new FormData(e.target as HTMLFormElement);
 
     if (coords) {
-      formData.append("lat", coords.lat.toString());
-      formData.append("lon", coords.long.toString());
+      formData.append("lat", coords.lat);
+      formData.append("lon", coords.lon);
     }
 
     try {
@@ -105,10 +107,10 @@ const CreateEvent = () => {
               {coords && (
                 <div className="flex flex-col gap-1 mt-2">
                   <p>
-                    Coordonnées trouvées : {coords.lat}, {coords.long}
+                    Coordonnées trouvées : {coords.lat}, {coords.lon}
                   </p>
 
-                  <MapView lat={coords.lat} lon={coords.long} />
+                  <MapView lat={coords.lat} lon={coords.lon} />
                 </div>
               )}
             </div>
