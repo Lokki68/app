@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 
-function ChangeView({ lat, lon }: { lat: number; lon: number }) {
+function ChangeView({ lat, lon }: { lat: string; lon: string }) {
   const map = useMap();
 
   useEffect(() => {
@@ -22,10 +22,10 @@ const icon = L.icon({
   iconAnchor: [12, 41],
 });
 
-export default function MapView({ lat, lon }: { lat: number; lon: number }) {
+export default function MapView({ lat, lon }: { lat: string; lon: string }) {
   return (
     <MapContainer
-      center={[lat, lon]}
+      center={[Number(lat), Number(lon)]}
       zoom={15}
       style={{ height: "300px", width: "100%", borderRadius: "12px" }}
     >
@@ -33,7 +33,7 @@ export default function MapView({ lat, lon }: { lat: number; lon: number }) {
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[lat, lon]} icon={icon}>
+      <Marker position={[Number(lat), Number(lon)]} icon={icon}>
         <Popup>Lieu choisi</Popup>
       </Marker>
       <ChangeView lat={lat} lon={lon} />
