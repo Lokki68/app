@@ -20,6 +20,7 @@ const Navbar = ({ isConnected }: { isConnected: boolean }) => {
       <DropdownMenuContent align="end">
         <NavigationItem href="/" title="Accueil" />
         <NavigationItem href="/events" title="Evènements" />
+        <NavigationItem href="/users" title="Utilisateurs" />
         {!isConnected && (
           <>
             <DropdownMenuSeparator />
