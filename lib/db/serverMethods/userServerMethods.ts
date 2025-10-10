@@ -1,11 +1,14 @@
 import UserType from "@/lib/types/user";
 import { connectToDb } from "@/lib/utils/db/connectToDb";
 import { User } from "../models/user";
+import { sessionInfo } from "./sessionServerMethods";
 
 export async function getUsers() {
   await connectToDb();
 
-  const users = await User.find();
+  const { userId } = await sessionInfo();
+
+  const users = await User.find({ _id: { $ne: userId } });
 
   if (!users) {
     throw new Error("No users found!");

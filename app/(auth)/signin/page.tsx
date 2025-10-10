@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/lib/db/serverActions/sessionServerAction";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import { toast } from "sonner";
 
@@ -23,10 +23,12 @@ const Signin = () => {
 
       if (result.success) {
         toast.success("Utilisateur connecté avec succès");
+        redirect("/");
       }
 
       router.push("/");
     } catch (error) {
+      console.error("error", error);
       toast.error(
         "Une erreur est survenue lors de la connexion, verifier vos identifiants"
       );
@@ -53,7 +55,7 @@ const Signin = () => {
 
             <Button type="submit">Envoyer</Button>
             <p className="text-center">
-              Je ne pocède pas de compte -{" "}
+              Je ne possède pas de compte -{" "}
               <Link href="/signup" className="text-blue-600 underline">
                 inscription ici
               </Link>

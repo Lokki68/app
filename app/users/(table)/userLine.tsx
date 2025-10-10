@@ -1,15 +1,13 @@
-import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
+import ContactAction from "@/components/users/ContactAction";
 import UserType from "@/lib/types/user";
-import { Star } from "lucide-react";
 
 const UserLine = ({ user }: { user: UserType }) => {
+
   return (
     <TableRow>
       <TableCell>
-        <Button variant="ghost" size="icon">
-          <Star />
-        </Button>
+        <ContactAction contactId={user._id ? user._id.toString() : ''} action="add" />
       </TableCell>
       <TableCell>{user.username}</TableCell>
       <TableCell>{user.email}</TableCell>

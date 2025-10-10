@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
+import ContactAction from "@/components/users/ContactAction";
 import UserType from "@/lib/types/user";
-import { Trash2 } from "lucide-react";
 
 const ContactLine = ({ contact }: { contact: UserType }) => {
   return (
@@ -9,9 +8,7 @@ const ContactLine = ({ contact }: { contact: UserType }) => {
       <TableCell>{contact.username}</TableCell>
       <TableCell>{contact.email}</TableCell>
       <TableCell>
-        <Button variant="destructive" size="icon">
-          <Trash2 />
-        </Button>
+        <ContactAction contactId={contact._id ? contact._id : ''} action="remove" />
       </TableCell>
     </TableRow>
   );
