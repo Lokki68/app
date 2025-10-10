@@ -11,7 +11,11 @@ type UserType = {
   events?: {
     type: Schema.Types.ObjectId;
     ref: "Event";
-  }[]; // Array of Event IDs
+  }[];
+  contacts?: {
+    type: Schema.Types.ObjectId;
+    ref: "User";
+  }[];
 };
 
 export default UserType;

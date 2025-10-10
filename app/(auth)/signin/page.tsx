@@ -27,6 +27,7 @@ const Signin = () => {
 
       router.push("/");
     } catch (error) {
+      console.error("error", error);
       toast.error(
         "Une erreur est survenue lors de la connexion, verifier vos identifiants"
       );
@@ -53,7 +54,7 @@ const Signin = () => {
 
             <Button type="submit">Envoyer</Button>
             <p className="text-center">
-              Je ne pocède pas de compte -{" "}
+              Je ne possède pas de compte -{" "}
               <Link href="/signup" className="text-blue-600 underline">
                 inscription ici
               </Link>
