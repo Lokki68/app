@@ -7,8 +7,17 @@ export async function getUsers() {
   await connectToDb();
 
   const { userId } = await sessionInfo();
+  const currentUser = await User.findById(userId);
 
-  const users = await User.find({ _id: { $ne: userId } });
+  if (!currentUser) {
+    throw new Error("Current user not found");
+  }
+
+  console.log(currentUser);
+
+  const users = await User.find({
+    _id: { $nin: [userId, ...(currentUser.contacts || [])] },
+  });
 
   if (!users) {
     throw new Error("No users found!");

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/lib/db/serverActions/sessionServerAction";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import { toast } from "sonner";
 
@@ -23,7 +23,6 @@ const Signin = () => {
 
       if (result.success) {
         toast.success("Utilisateur connecté avec succès");
-        redirect("/");
       }
 
       router.push("/");

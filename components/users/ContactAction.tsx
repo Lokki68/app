@@ -1,44 +1,66 @@
-'use client'
+"use client";
 
-import { Star, StarOff } from "lucide-react"
-import { Button } from "../ui/button"
+import { Star, StarOff } from "lucide-react";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
 
-const ContactAction = ({ contactId, action }: { contactId: string, action: 'add' | 'remove' }) => {
-
+const ContactAction = ({
+  contactId,
+  action,
+}: {
+  contactId: string;
+  action: "add" | "remove";
+}) => {
   const handleAddContact = async () => {
-    if (contactId === '') {
-      return
+    if (contactId === "") {
+      return;
     }
 
-    const res = await fetch('/api/contacts/add', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contactId })
-    })
+    const res = await fetch("/api/contacts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contactId }),
+    });
 
-    console.log(res)
+    if (res.ok) {
+      toast.success("Contact ajouté avec succès");
+      redirect("/");
+    }
+  };
 
-    return
+  const handleRemoveContact = async () => {
+    if (contactId === "") {
+      return;
+    }
 
-    const data = await res.json()
+    const res = await fetch("/api/contacts/remove", {
+      method: "POST",
+      headers: { "Content-Type": "appilication/json" },
+      body: JSON.stringify({ contactId }),
+    });
 
-    console.log(data)
-
-  }
-
-  const handleRemoveContact = () => { }
+    if (res.ok) {
+      toast.success("Contact supprimé avec succès");
+      redirect("/");
+    }
+  };
 
   return (
     <>
-      {
-        action === 'add' && <Button onClick={handleAddContact} ><Star /></Button>
-      }
+      {action === "add" && (
+        <Button onClick={handleAddContact}>
+          <Star />
+        </Button>
+      )}
 
-      {
-        action === 'remove' && <Button onClick={handleRemoveContact} ><StarOff /></Button>
-      }
+      {action === "remove" && (
+        <Button onClick={handleRemoveContact}>
+          <StarOff />
+        </Button>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default ContactAction
+export default ContactAction;
