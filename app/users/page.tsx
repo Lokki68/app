@@ -1,8 +1,12 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { sessionInfo } from "@/lib/db/serverMethods/sessionServerMethods";
-import { getUsers } from "@/lib/db/serverMethods/userServerMethods";
+import {
+  getContacts,
+  getUsers,
+} from "@/lib/db/serverMethods/userServerMethods";
 import { redirect } from "next/navigation";
-import UsersTable from "./usersTable";
+import ContactTable from "./(table)/contactTable";
+import UsersTable from "./(table)/usersTable";
 
 const page = async () => {
   const { userId } = await sessionInfo();
@@ -10,6 +14,8 @@ const page = async () => {
   if (!userId) {
     redirect("/signin");
   }
+
+  const { contacts } = await getContacts(userId.toString());
 
   const { users } = await getUsers();
 
@@ -20,7 +26,9 @@ const page = async () => {
       </div>
       <Card className="my-4">
         <CardHeader>Mes Contacts</CardHeader>
-        <CardContent></CardContent>
+        <CardContent>
+          {contacts && <ContactTable contacts={contacts} />}
+        </CardContent>
       </Card>
 
       <Card className="my-4">
